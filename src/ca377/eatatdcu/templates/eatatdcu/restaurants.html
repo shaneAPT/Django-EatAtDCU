@@ -1,0 +1,135 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'eatatdcu/style.css' %}">
+<link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
+
+<header>
+	<div id="dcu-logo-header">
+		<a href="{% url 'eatatdcu:index' %}"><img src="{% static 'eatatdcu/images/dcu_logo_stacked_green.png' %}"></img></a>
+		<div id="dcu-logo-header-text"><a href="{% url 'eatatdcu:index' %}">Eat at DCU!</a></div>
+	</div>
+</header>
+
+<main>
+	<div id="searchbar"><form action="{% url 'eatatdcu:restaurants'  %}" method="get"><input type="text" name="campus" placeholder="{{campus_name}}"><input type="submit" value="Go"><br><label><input type="checkbox" name="staff-only" value="true">Staff Only</label><label><input type="checkbox" name="cafe-checkbox" value="yes" checked>Cafes</label><label><input type="checkbox" name="restaurant-checkbox" value="yes" checked>Restaurants</label>
+	</form></div>
+
+	<div id="query-results">
+		<script>
+			// When the user clicks on div, open the popup https://www.w3schools.com/howto/howto_js_popup.asp
+			function myFunction(name) {
+				var popup = document.getElementById(name);
+				popup.classList.toggle("show");
+			}
+		</script>
+		{% if error %}
+			{{ error }}
+		{% else %}
+			<div class="locations">
+				{% if restaurants == None and cafes == None %}
+					No location type selected
+				{% endif %}
+				{% if restaurants != None %}
+					<h3>Restaurants</h3>
+					{% if restaurants %}
+						{% for r in restaurants %}
+							<div class="location-card">
+								<div class="location-card-title">{{r.name}}</div>
+								<div class="location-card-image"> 
+									{% with 'eatatdcu/images/'|add:r.name|add:'.png' as image_static %} {# https://stackoverflow.com/questions/18040941/load-static-file-with-variable-name-in-django #}
+										<img src="{% static image_static %}"></img>
+									{% endwith %}
+
+								</div>
+								<div class="location-card-location">{{r.location}}</div>
+								<div class="location-card-times">
+									<div class="location-card-opening-hours"><b>Opening Hours</b> {{r.opening_hours}}, {{r.closing_hours}}</div>
+									<div class="location-card-weekend-hours"><b>Weekend hours:</b> 
+										{% if r.is_open_wknd == 1 %}
+											{{r.opening_hours_wknd}}, {{r.closing_hours_wknd}}
+										{% else %} 
+											closed on weekends 
+										{% endif %}
+									</div>
+								</div>
+								<div class="location-card-staff-only">{% if r.is_staff_only %} (staff only!) {% endif %}</div>
+								<div class="location-card-bottom-buttons">
+									<div class="location-card-map-button">
+										{% with r.restaurant_id as popup_id %}
+										<div class="popup" onclick="myFunction({{popup_id}})"><a>Map</a>
+											{% with r.map_location as location_url %}
+											<span class="popuptext" id="{{popup_id}}"><p>Click anywhere to exit map.</p><iframe src="{{location_url}}" width="750" height="600" frameborder="0" style="border:0" allowfullscreen></iframe></span>
+											{% endwith %}
+										</div>
+										{% endwith %}
+									</div>
+									<div class="location-card-specials-button"><a href="{% url 'eatatdcu:specials' restaurant=r.name %}">Specials</a></div>
+								</div>
+							</div>
+						{% endfor %}
+					{% else %}
+						No restaurants found
+					{% endif %}
+				{% endif %}
+
+				{% if cafes != None %}
+					<h3>Cafes</h3>
+					{% if cafes %}
+						{% for c in cafes %}
+							<div class="location-card">
+								<div class="location-card-title">{{c.name}}</div>
+								<div class="location-card-image"> 
+									{% with 'eatatdcu/images/'|add:c.name|add:'.png' as image_static %}
+										<img src="{% static image_static %}"></img>
+									{% endwith %}
+
+								</div>
+								<div class="location-card-location">{{c.location}}</div>
+								<div class="location-card-times">
+									<div class="location-card-opening-hours"><b>Opening Hours</b> {{c.opening_hours}}, {{c.closing_hours}}</div>
+									<div class="location-card-weekend-hours"><b>Weekend hours:</b> 
+										{% if c.is_open_wknd == 1 %}
+											{{c.opening_hours_wknd}}, {{c.closing_hours_wknd}}
+										{% else %} 
+											closed on weekends 
+										{% endif %}
+									</div>
+								</div>
+								<div class="location-card-staff-only">{% if c.is_staff_only %} (staff only!) {% endif %}</div>
+								<div class="location-card-bottom-buttons">
+									<div class="location-card-map-button">
+										{% with c.restaurant_id as popup_id %}
+										<div class="popup" onclick="myFunction({{popup_id}})"><a>Map</a>
+											{% with c.map_location as location_url %}
+											<span class="popuptext" id="{{popup_id}}"><p>Click anywhere to exit map.</p><iframe src="{{location_url}}" width="750" height="600" frameborder="0" style="border:0" allowfullscreen></iframe></span>
+											{% endwith %}
+										</div>
+										{% endwith %}
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+					{% else %}
+						No cafes found
+					{% endif %}
+				{% endif %}
+			</div>
+		{% endif %}
+	</div>
+</main>
+
+<footer>
+	<div id="footer-eu-logos">
+		<img src="{% static 'eatatdcu/images/eu-1.jpg' %}">
+		<img src="{% static 'eatatdcu/images/eu-2.jpg' %}">
+	</div>
+	<div id="footer-social-logos">
+		<a href="http://www.instagram.com/dublincityuniversity"><img src="{% static 'eatatdcu/images/instagram-logo.png' %}"></a>
+		<a href="http://www.twitter.com/dublincityuni"><img src="{% static 'eatatdcu/images/twitter-logo.jpg' %}"></a>
+		<a href="http://www.facebook.com/dcu"><img src="{% static 'eatatdcu/images/facebook-logo.jpg' %}"></a>
+		<a href="http://www.youtube.com/dublincityuniversity"><img src="{% static 'eatatdcu/images/youtube-logo.jpg' %}"></a>
+	</div>
+	<div id="footer-links">
+		<a href="">Loop</a>
+		<a href="">Homepage</a>
+	</div>
+</footer>

@@ -1,0 +1,378 @@
+html {
+	font-family: Arial; /* closest to objectiv mk2, the paid font dcu uses */
+	overflow-y: scroll;
+}
+
+body {
+	background-color: lightgrey;
+	margin: 0;
+	padding: 0;
+}
+
+#dcu-logo-header {
+	height: 20%;
+	width: 60%;
+	background: rgb(79, 134, 142);
+	text-align: center;
+	padding: 0% 20%;
+}
+
+#dcu-logo-header img {
+	height: 100%;
+	float: left;
+}
+
+#dcu-logo-header-text a {
+	color: white;
+	margin-top: 10%;
+	float: left;
+	width: 20%;
+	margin-left: 22.5%;
+	text-decoration: none;
+	font-size: 2rem;
+}
+
+#searchbar {
+	text-align: center;
+	padding-top: 2%;
+	margin: 0;
+}
+
+#searchbar input[value="cafe-checkbox"] {
+	padding-left: 2%;
+}
+
+#searchbar input[type=text] {
+	width: 25%;
+	height: 5%;
+	padding-left: .75%;
+}
+
+#searchbar input[type=submit] {
+	width: 5%;
+	height: 5%;
+	content: '\00bb';
+}
+
+#searchbar input[type=placeholder] {
+	padding-left: 5%;
+}
+
+#query-results {
+	margin: 0% 10%;
+	animation-name: fadeInOpacity-QueryResults; /* got this from https://stackoverflow.com/questions/11660710/css-transition-fade-in */
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 1.5s;
+    text-align: center;
+    padding-bottom: 5%;
+}
+
+#query-results h3 {
+
+}
+
+
+.location-card { /* taken from my personal website shaneapt.com */
+	display: inline-block;
+	background-color: #fcfcfc;
+	padding: 1% 1%;
+	width: 20.5rem;
+	height: 25rem;
+	text-decoration: none;
+	color: black;
+	border-style: solid;
+	border-color: #e8e8e8;
+	border-width: 1px;
+	vertical-align: top; /* Keeps boxes side by side in line */
+	margin-top: 0rem;
+	margin-left: .5rem;
+	margin-right: .5rem;
+	margin-bottom: 1rem;
+	overflow: auto;
+	position: relative;
+	box-shadow: 0 0 10px #c6c6c6;
+	opacity: 1;
+}
+
+/*.location-card:hover {
+	opacity: 1;
+}*/
+
+.location-card img {
+	width: 20.5rem;
+	align-content: center;
+}
+
+.location-card-title {
+	font-size: 1.8rem;
+	font-weight: bold;
+	padding-bottom: .5rem;
+	font-variant: normal;
+	text-align: center;
+}
+
+.location-card-bottom-buttons {
+	text-align: center;
+	padding-top: 5%;
+}
+
+.location-card-map-button, .location-card-specials-button {
+	display: inline-block;
+	background-color: #f2f2f2;
+	border-width: 1px;
+	border-color: #969696;
+	border-style: solid;
+	width: 45%;
+	height: 10%;
+}
+
+.location-card-map-button a, .location-card-specials-button a {
+	text-decoration: none;
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	padding-top: 7.5%;
+	color: black;
+}
+
+.location-card-location {
+	text-align: center;
+	font-size: .75rem;
+	padding: .3rem 0rem;
+}
+
+.location-card-times {
+	text-align: left;
+	padding-bottom: 1%
+}
+
+/* !!!!!!!!!!!!! map popup !!!!!! */
+
+.popup {
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.popup .popuptext {
+	visibility: hidden;
+	z-index: -1;
+	top: 25%;
+	position: fixed;
+}
+
+@keyframes fadeInOpacity-QueryResults {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.popup .popuptext::after {
+	content: "";
+	opacity: 1;
+}
+
+.popup .show p {
+	background-color: #3a3a3a;
+	width: 15%;
+	text-align: center;
+	margin-left: 15%;
+	margin-bottom: 0%;
+	padding-top: 4px;
+	color: white;
+}
+
+.popup .show {
+	visibility: visible;
+	padding-left: 27.5%;
+	padding-top: 10%;
+	position:fixed;
+	top:0px;
+	left:0px;
+	height: 100%;
+	width: 100%;
+	z-index:1000;
+}
+
+#query-results .show iframe {
+	background-color: #3a3a3a;
+	padding: .3%;
+	margin-right: 59%;
+}
+
+span {
+	background-color: rgba(186, 186, 186, 0.8);
+}
+
+/* !!!!!!!!!!!!!!!!!! */
+
+.location-card-staff-only {
+	min-height: 8%;
+}
+
+/* greenish-blue rgb(79,134,142) */
+
+footer {
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	position: relative;
+	text-align: center;
+	background-color: rgb(79, 134, 142);
+	height: 5%;
+	padding-bottom: 1.5%;
+	display: flex;
+	margin: 0;
+}
+
+main {
+	min-height: 72.5%;
+}
+
+header {
+
+}
+
+#footer-eu-logos {
+	padding-top: 1%;
+	width: 15%;
+	padding-left: 6.5%;
+	height: 80%;
+}
+
+#footer-eu-logos img {
+	height: 2.5rem;
+}
+
+#footer-social-logos {
+	padding-top: 1.5%;
+	width: 40%;
+	padding-left: 7.5%;
+}
+
+#footer-social-logos img {
+	height: 1.5rem;
+}
+
+#footer-links {
+	padding-top: 1.75%;
+	width: 15%;
+	padding-left: 7.5%;
+}
+
+#footer-links a {
+	text-decoration: none;
+	color: white;
+	padding-right: 1rem;
+}
+
+#current-special, #all-specials{
+	background-color: white;
+	width: 20%;
+	left: 50%;
+	text-align: center;
+	padding: 1% .5%;
+	margin-bottom: 3%;
+	margin-left: 40%;
+}
+
+#specials {
+	text-align: center;
+}
+
+#specials-restaurant-title {
+	font-weight: bold;
+	font-size: 1.5rem;
+	padding-bottom: 2%;
+}
+
+#featured-restaurant, #info-box {
+	padding-bottom: 5%;
+	overflow: hidden;
+}
+
+#featured-restaurant-container, #info-box-container {
+	background-color: #ededed;
+	width: 60%;
+	margin-left: 20%;
+	padding: .5% 1%;
+	display: flex;
+	height: 33%;
+	box-shadow: 3px 5px #bfbfbf;
+}
+
+#featured-restaurant h2, #info-box h2{
+	border: none;
+	margin: 0;
+	background-color: rgb(79, 134, 142);
+	width: 15%;
+	margin-left: 20%;
+	padding: .5% 1%;
+	color: white;
+	box-shadow: 3px 5px #bfbfbf;
+}
+
+#featured-right img {
+	width: 100%;
+	height: 100%;
+}
+
+#featured-left, #info-box-left {
+	width: 40%;
+	float: left;
+	flex: 0 0 50%;
+	height: 100%;
+	text-align: center;
+}
+
+#featured-right, #info-box-right {
+	width: 40%;
+	flex: 1;
+}
+
+#featured-name {
+	padding-bottom: 1%;
+	font-size: 1.5rem;
+}
+
+#featured-location {
+	padding-bottom: 15%;
+}
+
+#featured-opening-times {
+	padding-bottom: 1%;
+}
+
+
+#featured-staff-only {
+	padding-top: 5%;
+	font-weight: bold;
+}
+
+#featured-information {
+	min-height:91%;
+	text-align: left;
+}
+
+#featured-more-button a {
+	background-color: white;
+	padding: 2% 6%;
+	text-decoration: none;
+	color: black;
+}
+
+#info-box-container img {
+	width: 95%;
+	margin-right: 5%;
+	padding-top: 2%;
+}
+
+#current-special, #all-specials {
+	box-shadow: 3px 5px #bfbfbf;
+}

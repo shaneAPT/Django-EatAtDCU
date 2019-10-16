@@ -1,0 +1,53 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'eatatdcu/style.css' %}">
+<link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
+
+<div id="dcu-logo-header">
+	<a href="{% url 'eatatdcu:index' %}"><img src="{% static 'eatatdcu/images/dcu_logo_stacked_green.png' %}"></img></a>
+	<div id="dcu-logo-header-text"><a href="{% url 'eatatdcu:index' %}">Eat at DCU!</a></div>
+</div>
+
+<main>
+	<div id="searchbar"><form action="{% url 'eatatdcu:restaurants'  %}" method="get"><input type="text" name="campus" placeholder="{{real_time.restaurant_name }}"><input type="submit" value="Go"><br><label><input type="checkbox" name="staff-only" value="staff-only">Staff Only</label><label><input type="checkbox" name="cafe-checkbox" value="yes" checked>Cafes</label><label><input type="checkbox" name="restaurant-checkbox" value="yes" checked>Restaurants</label></form></div>
+
+	<div id="specials">
+		{% if error %}
+			b>An error has occurred</b>: {{ error }}
+		{% else %}
+			<div id="specials-restaurant-title">{{real_time.restaurant_name }}</div>
+			<div id="current-special-container">
+				<h3>Today's Special:</h3>
+				<div id="current-special">
+					<div id="specials-daily">{{ real_time.daily_special }}</div>
+					<div id="specials-date">({{ real_time.date }})</div>
+				</div>
+			</div>
+			<div id="all-specials-container">
+				<h3>All Specials:</h3>
+				<div id="all-specials">
+					{% for special in all_time.all_specials %}
+						{{ special }}<br>
+					{% endfor %}
+					<p>Note: Only the daily special stated above is available as of today's date.</p>
+				</div>
+			</div>
+		{% endif %}
+	</div>
+</main>
+
+<footer>
+	<div id="footer-eu-logos">
+		<img src="{% static 'eatatdcu/images/eu-1.jpg' %}">
+		<img src="{% static 'eatatdcu/images/eu-2.jpg' %}">
+	</div>
+	<div id="footer-social-logos">
+		<a href="http://www.instagram.com/dublincityuniversity"><img src="{% static 'eatatdcu/images/instagram-logo.png' %}"></a>
+		<a href="http://www.twitter.com/dublincityuni"><img src="{% static 'eatatdcu/images/twitter-logo.jpg' %}"></a>
+		<a href="http://www.facebook.com/dcu"><img src="{% static 'eatatdcu/images/facebook-logo.jpg' %}"></a>
+		<a href="http://www.youtube.com/dublincityuniversity"><img src="{% static 'eatatdcu/images/youtube-logo.jpg' %}"></a>
+	</div>
+	<div id="footer-links">
+		<a href="">Loop</a>
+		<a href="">Homepage</a>
+	</div>
+</footer>

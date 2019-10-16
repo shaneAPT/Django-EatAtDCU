@@ -1,0 +1,79 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'eatatdcu/style.css' %}">
+<link rel="shortcut icon" href="{%  static 'favicon.ico' %}">
+
+<header>
+	<div id="dcu-logo-header">
+		<a href="{% url 'eatatdcu:index' %}"><img src="{% static 'eatatdcu/images/dcu_logo_stacked_green.png' %}"></img></a>
+		<div id="dcu-logo-header-text"><a href="{% url 'eatatdcu:index' %}">Eat at DCU!</a></div>
+	</div>
+</header>
+
+<main>
+	<div id="searchbar"><form action="{% url 'eatatdcu:restaurants'  %}" method="get"><input type="text" name="campus" placeholder="Enter a campus name..."><input type="submit" value="Go"><br><label><input type="checkbox" name="staff-only" value="true">Staff Only</label><label><input type="checkbox" name="cafe-checkbox" value="yes" checked>Cafes</label><label><input type="checkbox" name="restaurant-checkbox" value="yes" checked>Restaurants</label>
+	</form></div>
+	<div id="featured-restaurant">
+		<h2>Featured Venue</h2>
+		<div id="featured-restaurant-container">
+			{% for r in featured_restaurant %}
+				<div id="featured-left">
+					<div id="featured-information">
+						<div id="featured-name">{{r.name}}</div>
+						<div id="featured-location">{{r.location}}</div>
+						<div id="featured-opening-times">Opening Hours: {{r.opening_hours}}-{{r.closing_hours}}</div>
+						<div id="featured-weekend-times">Weekend Hours:
+							{% if r.is_open_wknd == 1 %}
+								{{r.opening_hours_wknd}}-{{r.closing_hours_wknd}}
+							{% else %}
+								Closed
+							{% endif %}
+						</div>
+						<div id="featured-staff-only">{% if r.is_staff_only %} (staff only!) {% endif %}</div>
+					</div>
+					<div id="featured-more-button"> 
+						{% if r.is_restaurant == 1 %}
+							<a href="{% url 'eatatdcu:specials' restaurant=r.name %}">Specials</a>
+						{% endif %}
+					</div>
+				</div>
+				<div id="featured-right">
+					<div id="featured-image">
+						{% with 'eatatdcu/images/'|add:r.name|add:'.png' as image_static %}
+							<img src="{% static image_static %}"></img>
+						{% endwith %}
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	<div id="info-box">
+		<h2>About</h2>
+		<div id="info-box-container">
+			<div id="info-box-left">
+			<img src="{% static 'eatatdcu/images/food.jpg' %}"></img>
+			</div>
+			<div id="info-box-right">
+				<p>Being on any of the DCU campuses means many things to people: learning, work, sport or attending events. Our restaurants and catering services attempt to encompass the diverse needs of users across all campuses.</p>
+				<p>The range of services include catering in the restaurants and cafés, providing delivered catering to meetings/events and providing dining services in the 1838 club on the Glasnevin campus for meetings, seminars and conferences.</p>
+				<p>On this site you'll find information about our food, as well as menus, which are updated daily. </p>
+			</div>
+		</div>
+	</div>
+</main>
+
+<footer>
+	<div id="footer-eu-logos">
+		<img src="{% static 'eatatdcu/images/eu-1.jpg' %}">
+		<img src="{% static 'eatatdcu/images/eu-2.jpg' %}">
+	</div>
+	<div id="footer-social-logos">
+		<a href="http://www.instagram.com/dublincityuniversity"><img src="{% static 'eatatdcu/images/instagram-logo.png' %}"></a>
+		<a href="http://www.twitter.com/dublincityuni"><img src="{% static 'eatatdcu/images/twitter-logo.jpg' %}"></a>
+		<a href="http://www.facebook.com/dcu"><img src="{% static 'eatatdcu/images/facebook-logo.jpg' %}"></a>
+		<a href="http://www.youtube.com/dublincityuniversity"><img src="{% static 'eatatdcu/images/youtube-logo.jpg' %}"></a>
+	</div>
+	<div id="footer-links">
+		<a href="">Loop</a>
+		<a href="">Homepage</a>
+	</div>
+</footer>

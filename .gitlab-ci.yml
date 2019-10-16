@@ -1,0 +1,28 @@
+image: "smblott/dcu-docker-gitlab-ci"
+
+testA2:
+  script:
+    - "django-admin --version"
+    - "echo ok checking submission for A2"
+    - "echo running python django test"
+    - "cd src/ca377; python3 manage.py test eatatdcu"
+    - "echo finished A2 submission checks"
+
+#testA0:
+#  script:
+#    - "django-admin --version"
+#    - "echo ok checking submission for A0"
+#    - "echo checking for restaurants.html"
+#    - "ls src/ca377/eatatdcu/templates/eatatdcu/restaurants.html"
+#    - "echo found restaurants.html"
+#    - "echo ok checking submission for A1"
+#    - "echo checking for restaurant.csv and campus.csv"
+#    - "ls data/restaurant.csv"
+#    - "ls data/campus.csv"
+#    - "echo found restaurant.csv and campus.csv"
+#    - "echo checking for load_db_data.py"
+#    - "ls src/ca377/load_db_data.py"
+#    - "echo found load_db_data.py"
+#    - "cd src/ca377; python3 manage.py test eatatdcu"
+#    - "echo running python django test"
+#    - "echo finished A1 submission checks"
